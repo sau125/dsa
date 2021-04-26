@@ -1,0 +1,20 @@
+def lcspatmatch(x,y,n,m,t):
+    if n==0 or m==0:
+        return 0
+    if x[n-1]==y[m-1]:
+        t[n][m]=1+lcspatmatch(x,y,n-1,m-1,t)
+        return t[n][m]
+    elif x[n-1]!=y[m-1]:
+        t[n][m]=max(lcspatmatch(x,y,n,m-1,t),lcspatmatch(x,y,n-1,m,t))  
+        return t[n][m]
+    
+x=input()
+y=input()
+n=len(x)
+m=len(y)
+t=[[-1 for i in range(m+1)] for j in range(n+1)]
+r=lcspatmatch(x,y,n,m,t)
+if r==m:
+    print("True")
+else:
+    print("False")
